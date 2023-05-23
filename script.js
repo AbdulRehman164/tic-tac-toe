@@ -8,7 +8,10 @@ function Gameboard() {
     }
   }
   const getBoard = () => board;
-  return { getBoard };
+  const printBoard = () =>
+    board.map((row) => row.map((cell) => cell.getValue()));
+
+  return { getBoard, printBoard };
 }
 
 function Cell() {
