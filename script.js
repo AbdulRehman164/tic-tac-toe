@@ -26,4 +26,15 @@ function Cell() {
   return { getValue, addToken };
 }
 
-Gameboard();
+function GameControl() {
+  const players = [
+    {
+      name: 'player1',
+      sign: 'X',
+    },
+    {
+      name: 'plyer2',
+      sign: 'O',
+    },
+  ];
+}
