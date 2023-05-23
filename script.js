@@ -7,7 +7,8 @@ function Gameboard() {
       board[i].push(Cell());
     }
   }
-  return board;
+  const getBoard = () => board;
+  return { getBoard };
 }
 
 function Cell() {
