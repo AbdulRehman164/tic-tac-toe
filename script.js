@@ -10,8 +10,11 @@ function Gameboard() {
   const getBoard = () => board;
   const printBoard = () =>
     board.map((row) => row.map((cell) => cell.getValue()));
+  const placeToken = (index, player) => {
+    board[index[0]][index[1]].addToken(player);
+  };
 
-  return { getBoard, printBoard };
+  return { getBoard, printBoard, placeToken };
 }
 
 function Cell() {
