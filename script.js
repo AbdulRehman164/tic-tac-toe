@@ -39,6 +39,6 @@ function GameControl() {
   ];
   let selectedPlayer = players[0];
   const changeSelectedPlayer = () => {
-    selectedPlayer = selectedPlayer === players[0] ? players[1] : players[1];
+    selectedPlayer = selectedPlayer === players[0] ? players[1] : players[0];
   };
 }
