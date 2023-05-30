@@ -1,4 +1,4 @@
-function Gameboard() {
+const gameBoard = (() => {
   const board = [];
   for (let i = 0; i < 3; i++) {
     board[i] = [];
@@ -15,7 +15,7 @@ function Gameboard() {
   };
 
   return { getBoard, printBoard, placeToken };
-}
+})();
 
 function Cell() {
   let value = 0;
@@ -26,7 +26,7 @@ function Cell() {
   return { getValue, addToken };
 }
 
-function GameControl() {
+const gameController = (() => {
   const players = [
     {
       name: 'player1',
@@ -41,4 +41,14 @@ function GameControl() {
   const changeSelectedPlayer = () => {
     selectedPlayer = selectedPlayer === players[0] ? players[1] : players[0];
   };
-}
+  console.log(gameBoard.printBoard()); // intial board print
+  console.log(`${selectedPlayer.name} turn`);
+
+  function playRound(index) {
+    gameBoard.placeToken(index, selectedPlayer.sign);
+    changeSelectedPlayer();
+    console.log(gameBoard.printBoard());
+    console.log(`${selectedPlayer.name} turn`);
+  }
+  return playRound;
+})();
