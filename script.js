@@ -50,5 +50,10 @@ const gameController = (() => {
     console.log(gameBoard.printBoard());
     console.log(`${selectedPlayer.name} turn`);
   }
-  return playRound;
+  return { playRound, printBoard: gameBoard.printBoard };
 })();
+
+console.log('hello');
+console.log(gameController);
+console.log(gameController.printBoard());
+function screenRendering() {}
