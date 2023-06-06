@@ -61,8 +61,8 @@ const gameController = (() => {
 })();
 
 function screenRendering() {
-  const playerTurnPara = document.createElement('para');
-  document.body.appendChild(playerTurnPara);
+  const playerTurnPara = document.querySelector('.playerTurnPara');
+  // initail player turn printing
   playerTurnPara.textContent = `${
     gameController.getSelectedPlayer().name
   } turn`;
