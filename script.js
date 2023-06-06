@@ -53,7 +53,16 @@ const gameController = (() => {
   return { playRound, printBoard: gameBoard.printBoard };
 })();
 
-console.log('hello');
-console.log(gameController);
-console.log(gameController.printBoard());
-function screenRendering() {}
+function screenRendering() {
+  const gameBoardContainer = document.querySelector('.gameBoardContainer');
+  const divs = [];
+  for (let i = 0; i < 3; i++) {
+    divs[i] = [];
+    for (let j = 0; j < 3; j++) {
+      divs[i][j] = document.createElement('div');
+      gameBoardContainer.appendChild(divs[i][j]);
+      divs[i][j].dataset.index = [i, j];
+    }
+  }
+}
+screenRendering();
