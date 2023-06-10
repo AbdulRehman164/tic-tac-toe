@@ -86,12 +86,15 @@ const gameController = (() => {
     printBoard: gameBoard.printBoard,
     getSelectedPlayer,
     changeSelectedPlayer,
+    players,
   };
 })();
 
 function screenRendering() {
   const gameBoardContainer = document.querySelector('.gameBoardContainer');
   const playerTurnPara = document.querySelector('.playerTurnPara');
+  const playervs = document.querySelector('.playervs');
+  playervs.textContent = `${gameController.players[0].name} vs ${gameController.players[1].name}`;
 
   const divs = [];
   for (let i = 0; i < 3; i++) {
