@@ -34,7 +34,7 @@ const gameController = (() => {
       sign: 'X',
     },
     {
-      name: 'plyer2',
+      name: 'player2',
       sign: 'O',
     },
   ];
@@ -61,23 +61,22 @@ const gameController = (() => {
 })();
 
 function screenRendering() {
-  const playerTurnPara = document.querySelector('.playerTurnPara');
-  // initail player turn printing
-  playerTurnPara.textContent = `${
-    gameController.getSelectedPlayer().name
-  } turn`;
-
   const gameBoardContainer = document.querySelector('.gameBoardContainer');
-  const divs = [];
-  for (let i = 0; i < 3; i++) {
-    divs[i] = [];
-    for (let j = 0; j < 3; j++) {
-      divs[i][j] = document.createElement('div');
-      gameBoardContainer.appendChild(divs[i][j]);
-      divs[i][j].dataset.index = [i, j];
-      divs[i][j].classList.add('cells');
+  const playerTurnPara = document.querySelector('.playerTurnPara');
+
+  const createDivs = (() => {
+    const divs = [];
+    for (let i = 0; i < 3; i++) {
+      divs[i] = [];
+      for (let j = 0; j < 3; j++) {
+        divs[i][j] = document.createElement('div');
+        gameBoardContainer.appendChild(divs[i][j]);
+        divs[i][j].dataset.index = [i, j];
+        divs[i][j].classList.add('cells');
+      }
     }
-  }
+    return divs;
+  })();
 
   function updateScreen(e) {
     gameController.playRound(e.target.dataset.index.split(','));
@@ -88,13 +87,18 @@ function screenRendering() {
         let color = 'white';
         if (board[i][j] === 'X') color = 'red';
         else color = 'blue';
-        divs[i][j].style.backgroundColor = color;
+        createDivs[i][j].style.backgroundColor = color;
       }
     }
     playerTurnPara.textContent = `${
       gameController.getSelectedPlayer().name
     } turn`;
   }
+
+  // initail player turn printing
+  playerTurnPara.textContent = `${
+    gameController.getSelectedPlayer().name
+  } turn`;
   gameBoardContainer.addEventListener('click', updateScreen);
 }
 screenRendering();
