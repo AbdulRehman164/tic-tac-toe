@@ -1,10 +1,28 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 .gameBoardContainer {
   width: 306px;
-  /* border: 2px solid red; */
 }
 .cells {
   height: 100px;
   width: 100px;
-  border: 1px solid black;
   display: inline-block;
+  vertical-align: top;
+}
+.line0,
+.line1 {
+  border-bottom: 1px solid black;
+  border-right: 1px solid black;
+}
+.line2 {
+  border-right: 1px solid black;
+}
+
+[data-index='0,2'],
+[data-index='1,2'],
+[data-index='2,2'] {
+  border-right: none;
 }

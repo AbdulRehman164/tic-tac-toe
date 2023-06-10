@@ -102,6 +102,7 @@ function screenRendering() {
         gameBoardContainer.appendChild(divs[i][j]);
         divs[i][j].dataset.index = [i, j];
         divs[i][j].classList.add('cells');
+        divs[i][j].classList.add(`line${i}`);
       }
     }
     return divs;
