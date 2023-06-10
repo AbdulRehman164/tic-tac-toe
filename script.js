@@ -93,20 +93,20 @@ function screenRendering() {
   const gameBoardContainer = document.querySelector('.gameBoardContainer');
   const playerTurnPara = document.querySelector('.playerTurnPara');
 
-  const createDivs = (() => {
-    const divs = [];
-    for (let i = 0; i < 3; i++) {
-      divs[i] = [];
-      for (let j = 0; j < 3; j++) {
-        divs[i][j] = document.createElement('div');
-        gameBoardContainer.appendChild(divs[i][j]);
-        divs[i][j].dataset.index = [i, j];
-        divs[i][j].classList.add('cells');
-        divs[i][j].classList.add(`line${i}`);
-      }
+  const divs = [];
+  for (let i = 0; i < 3; i++) {
+    divs[i] = [];
+    for (let j = 0; j < 3; j++) {
+      divs[i][j] = document.createElement('div');
+      gameBoardContainer.appendChild(divs[i][j]);
+      divs[i][j].dataset.index = [i, j];
+      divs[i][j].classList.add('cells');
+      divs[i][j].classList.add(`line${i}`);
+      divs[i][
+        j
+      ].innerHTML = `<img src = "/img/cross.svg" class = "cross cross${i}${j}"> <img src = "/img/circle.svg" class = "circle circle${i}${j}">`;
     }
-    return divs;
-  })();
+  }
 
   function updateScreen(e) {
     gameController.playRound(e.target.dataset.index.split(','));
@@ -114,10 +114,9 @@ function screenRendering() {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
         if (board[i][j] === 0) continue;
-        let color = 'white';
-        if (board[i][j] === 'X') color = 'red';
-        else color = 'blue';
-        createDivs[i][j].style.backgroundColor = color;
+        if (board[i][j] === 'X')
+          document.querySelector(`.cross${i}${j}`).style.display = 'block';
+        else document.querySelector(`.circle${i}${j}`).style.display = 'block';
       }
     }
     playerTurnPara.textContent = `${

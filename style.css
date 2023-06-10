@@ -11,6 +11,7 @@
   width: 100px;
   display: inline-block;
   vertical-align: top;
+  text-align: center;
 }
 .line0,
 .line1 {
@@ -25,4 +26,9 @@
 [data-index='1,2'],
 [data-index='2,2'] {
   border-right: none;
+}
+
+.circle,
+.cross {
+  display: none;
 }
