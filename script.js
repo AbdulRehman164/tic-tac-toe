@@ -46,11 +46,27 @@ const gameController = (() => {
   console.log(gameBoard.printBoard()); // intial board print
   console.log(`${selectedPlayer.name} turn`);
 
+  function checkWinner() {
+    let match = 0;
+    const board = gameBoard.printBoard();
+    board.forEach((row) => {
+      row.reduce((previousValue, currentValue) => {
+        if (previousValue === currentValue && currentValue !== 0) match++;
+        return currentValue;
+      });
+      if (match === 2) {
+        alert('you win');
+      }
+      match = 0;
+    });
+  }
+
   function playRound(index) {
     gameBoard.placeToken(index, selectedPlayer.sign);
     changeSelectedPlayer();
     console.log(gameBoard.printBoard());
     console.log(`${selectedPlayer.name} turn`);
+    checkWinner();
   }
   return {
     playRound,
