@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Fasthand&family=Roboto&display=swap');
 * {
   margin: 0;
   padding: 0;
@@ -31,4 +32,16 @@
 .circle,
 .cross {
   display: none;
+}
+header h2 {
+  display: inline;
+  font-size: 3rem;
+  margin-left: 20px;
+}
+header {
+  outline: 2px solid red;
+  font-family: 'Fasthand';
+  display: flex;
+  align-items: center;
+  padding-left: 30px;
 }
