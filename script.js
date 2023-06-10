@@ -56,7 +56,12 @@ const gameController = (() => {
         columns[i][j] = board[j][i];
       }
     }
-    const merged = [...board, ...columns];
+
+    const diagonal = [
+      [board[0][0], board[1][1], board[2][2]],
+      [board[0][2], board[1][1], board[2][0]],
+    ];
+    const merged = [...board, ...columns, ...diagonal];
     merged.forEach((row) => {
       row.reduce((previousValue, currentValue) => {
         if (previousValue === currentValue && currentValue !== 0) match++;
