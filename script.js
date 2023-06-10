@@ -49,7 +49,15 @@ const gameController = (() => {
   function checkWinner() {
     let match = 0;
     const board = gameBoard.printBoard();
-    board.forEach((row) => {
+    const columns = [];
+    for (let i = 0; i < 3; i++) {
+      columns[i] = [];
+      for (let j = 0; j < 3; j++) {
+        columns[i][j] = board[j][i];
+      }
+    }
+    const merged = [...board, ...columns];
+    merged.forEach((row) => {
       row.reduce((previousValue, currentValue) => {
         if (previousValue === currentValue && currentValue !== 0) match++;
         return currentValue;
