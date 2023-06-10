@@ -15,11 +15,11 @@
 }
 .line0,
 .line1 {
-  border-bottom: 1px solid black;
-  border-right: 1px solid black;
+  border-bottom: 2px solid grey;
+  border-right: 2px solid grey;
 }
 .line2 {
-  border-right: 1px solid black;
+  border-right: 2px solid grey;
 }
 
 [data-index='0,2'],
