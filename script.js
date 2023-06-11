@@ -126,21 +126,39 @@ function screenRendering() {
     const playButton = document.querySelector('.play');
     const divForBlur = document.querySelector('.divForBlur');
     const namingCard = document.querySelector('.naming');
+    const player1Input = document.querySelector('#player1Name');
+    const player2Input = document.querySelector('#player2Name');
     humanButton.addEventListener('click', () => {
-      humanVsAiDiv.style.display = 'none';
-      otherPlayerNameDiv.style.display = 'flex';
-      playButton.style.display = 'block';
+      const isValid = player1Input.checkValidity();
+      if (!isValid) player1Input.reportValidity();
+      else {
+        humanVsAiDiv.style.display = 'none';
+        otherPlayerNameDiv.style.display = 'flex';
+        playButton.style.display = 'block';
+      }
     });
 
     aiButton.addEventListener('click', () => {
-      humanVsAiDiv.style.display = 'none';
-      aiDifficultyDiv.style.display = 'flex';
-      playButton.style.display = 'block';
+      const isValid = player1Input.checkValidity();
+      if (!isValid) player1Input.reportValidity();
+      else {
+        humanVsAiDiv.style.display = 'none';
+        aiDifficultyDiv.style.display = 'flex';
+        playButton.style.display = 'block';
+      }
     });
 
     playButton.addEventListener('click', () => {
-      namingCard.style.display = 'none';
-      divForBlur.classList.remove('blur');
+      const isValid1 = player1Input.checkValidity();
+      let isValid2 = player2Input.checkValidity();
+      if (aiDifficultyDiv.style.display === 'flex') isValid2 = true;
+      if (!isValid1 || !isValid2) {
+        player1Input.reportValidity();
+        player2Input.reportValidity();
+      } else {
+        namingCard.style.display = 'none';
+        divForBlur.classList.remove('blur');
+      }
     });
   }
   namingCardButtons();
