@@ -117,6 +117,31 @@ function screenRendering() {
     gameController.getSelectedPlayer().name
   } turn`;
 
+  function namingCardButtons() {
+    const humanButton = document.querySelector('.player2Selection');
+    const aiButton = document.querySelector('.aiSelection');
+    const humanVsAiDiv = document.querySelector('.humanVsAiSelection');
+    const otherPlayerNameDiv = document.querySelector('.otherPlayerName');
+    const aiDifficultyDiv = document.querySelector('.aiDifficultySelection');
+    const playButton = document.querySelector('.play');
+    const divForBlur = document.querySelector('.divForBlur');
+    const namingCard = document.querySelector('.naming');
+    humanButton.addEventListener('click', () => {
+      humanVsAiDiv.style.display = 'none';
+      otherPlayerNameDiv.style.display = 'flex';
+    });
+
+    aiButton.addEventListener('click', () => {
+      humanVsAiDiv.style.display = 'none';
+      aiDifficultyDiv.style.display = 'flex';
+    });
+
+    playButton.addEventListener('click', () => {
+      namingCard.style.display = 'none';
+      divForBlur.classList.remove('blur');
+    });
+  }
+  namingCardButtons();
   function reset() {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
