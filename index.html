@@ -10,12 +10,32 @@
 </head>
 
 <body>
+    <div class="blur"></div>
     <header>
         <img src="/logo/logo.png" alt="logo" class="logo" height="70px" width="70px">
         <h2>TicTacToe</h2>
         <p class="playervs"></p>
     </header>
     <main>
+        <section class="naming">
+            <div>
+                <label for="player1Name">Enter Your Name: </label>
+                <input type="text" id="player1Name">
+            </div>
+            <div>
+                <label for="opponentSelection">Who do you want to Play with</label>
+                <button class="opponentSelection player2Selection">Human</button>
+                <button class="opponentSelection aiSelection">A.I</button>
+            </div>
+
+            <label style="display: none;" for="player2Name">Other Player Name</label>
+            <input style="display: none;" type="text" id="player2Name">
+            <select style="display: none;" id="aiDifficulty">
+                <option value="easy">easy</option>
+                <option value="medium">medium</option>
+                <option value="hard">hard</option>
+            </select>
+        </section>
         <p class="playerTurnPara"></p>
         <div class="gameBoardContainer"></div>
         <button class="reset">Reset</button>
