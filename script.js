@@ -38,6 +38,7 @@ const gameController = (() => {
       sign: 'O',
     },
   ];
+  const getPlayers = () => players;
   let selectedPlayer = players[0];
   const changeSelectedPlayer = () => {
     selectedPlayer = selectedPlayer === players[0] ? players[1] : players[0];
@@ -86,6 +87,7 @@ const gameController = (() => {
     printBoard: gameBoard.printBoard,
     getSelectedPlayer,
     changeSelectedPlayer,
+    getPlayers,
     players,
   };
 })();
@@ -96,7 +98,6 @@ function screenRendering() {
   const playerTurnPara = document.querySelector('.playerTurnPara');
   const playervs = document.querySelector('.playervs');
   const gameBoardContainer = document.querySelector('.gameBoardContainer');
-  playervs.textContent = `${gameController.players[0].name} vs ${gameController.players[1].name}`;
 
   // Creating Divs
   const divs = [];
@@ -113,9 +114,6 @@ function screenRendering() {
     }
   }
   // initail player turn printing
-  playerTurnPara.textContent = `${
-    gameController.getSelectedPlayer().name
-  } turn`;
 
   function namingCardButtons() {
     const humanButton = document.querySelector('.player2Selection');
@@ -158,6 +156,14 @@ function screenRendering() {
       } else {
         namingCard.style.display = 'none';
         divForBlur.classList.remove('blur');
+        gameController.players[0].name = player1Input.value;
+        gameController.players[1].name = player2Input.value;
+        if (aiDifficultyDiv.style.display === 'flex')
+          gameController.players[1].name = 'A.I';
+        playerTurnPara.textContent = `${
+          gameController.getSelectedPlayer().name
+        } turn`;
+        playervs.textContent = `${gameController.players[0].name} vs ${gameController.players[1].name}`;
       }
     });
   }
