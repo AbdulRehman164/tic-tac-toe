@@ -129,11 +129,13 @@ function screenRendering() {
     humanButton.addEventListener('click', () => {
       humanVsAiDiv.style.display = 'none';
       otherPlayerNameDiv.style.display = 'flex';
+      playButton.style.display = 'block';
     });
 
     aiButton.addEventListener('click', () => {
       humanVsAiDiv.style.display = 'none';
       aiDifficultyDiv.style.display = 'flex';
+      playButton.style.display = 'block';
     });
 
     playButton.addEventListener('click', () => {
