@@ -4,6 +4,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  font-family: 'Roboto';
+}
 .gameBoardContainer {
   width: 306px;
 }
@@ -52,6 +55,24 @@ header {
   font-size: 1.5rem;
   font-family: 'fasthand';
 }
-.playervs span {
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 80vh;
+}
+.playerTurnPara {
   font-weight: bold;
+  font-size: 2rem;
+  /* margin-top: 40px; */
+}
+.reset {
+  border: none;
+  padding: 10px 30px;
+  font-size: 1.2rem;
+  border-radius: 20px;
+  font-weight: bold;
+  cursor: pointer;
 }
