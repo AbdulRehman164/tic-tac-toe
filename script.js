@@ -91,11 +91,14 @@ const gameController = (() => {
 })();
 
 function screenRendering() {
-  const gameBoardContainer = document.querySelector('.gameBoardContainer');
+  // Selecting elements
+  const resetButton = document.querySelector('.reset');
   const playerTurnPara = document.querySelector('.playerTurnPara');
   const playervs = document.querySelector('.playervs');
+  const gameBoardContainer = document.querySelector('.gameBoardContainer');
   playervs.textContent = `${gameController.players[0].name} vs ${gameController.players[1].name}`;
 
+  // Creating Divs
   const divs = [];
   for (let i = 0; i < 3; i++) {
     divs[i] = [];
@@ -103,12 +106,27 @@ function screenRendering() {
       divs[i][j] = document.createElement('div');
       gameBoardContainer.appendChild(divs[i][j]);
       divs[i][j].dataset.index = [i, j];
-      divs[i][j].classList.add('cells');
-      divs[i][j].classList.add(`line${i}`);
+      divs[i][j].classList.add('cells', `line${i}`);
       divs[i][
         j
-      ].innerHTML = `<img src = "/img/cross.svg" class = "cross cross${i}${j}"> <img src = "/img/circle.svg" class = "circle circle${i}${j}">`;
+      ].innerHTML = `<img src = "/img/cross.svg" class = "crossCircleSign cross cross${i}${j} signs"> <img src = "/img/circle.svg" class = "crossCircleSign circle circle${i}${j} signs">`;
     }
+  }
+  // initail player turn printing
+  playerTurnPara.textContent = `${
+    gameController.getSelectedPlayer().name
+  } turn`;
+
+  function reset() {
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        gameBoard.placeToken([i, j], 0);
+      }
+    }
+    const signs = document.querySelectorAll('.crossCircleSign');
+    signs.forEach((sign) => {
+      sign.classList.add('signs');
+    });
   }
 
   function updateScreen(e) {
@@ -118,8 +136,9 @@ function screenRendering() {
       for (let j = 0; j < 3; j++) {
         if (board[i][j] === 0) continue;
         if (board[i][j] === 'X')
-          document.querySelector(`.cross${i}${j}`).style.display = 'block';
-        else document.querySelector(`.circle${i}${j}`).style.display = 'block';
+          document.querySelector(`.cross${i}${j}`).classList.remove('signs');
+        else
+          document.querySelector(`.circle${i}${j}`).classList.remove('signs');
       }
     }
     playerTurnPara.textContent = `${
@@ -127,10 +146,7 @@ function screenRendering() {
     } turn`;
   }
 
-  // initail player turn printing
-  playerTurnPara.textContent = `${
-    gameController.getSelectedPlayer().name
-  } turn`;
   gameBoardContainer.addEventListener('click', updateScreen);
+  resetButton.addEventListener('click', reset);
 }
 screenRendering();

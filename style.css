@@ -32,8 +32,7 @@ body {
   border-right: none;
 }
 
-.circle,
-.cross {
+.signs {
   display: none;
 }
 header h2 {
