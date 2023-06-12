@@ -203,9 +203,12 @@ function screenRendering() {
     if (gameController.checkWinner() === true) {
       const divForBlur = document.querySelector('.divForBlur');
       const winnerDisplay = document.querySelector('.winnerDisplay');
+      const winnerPlayerNameDisplay = document.querySelector(
+        '.winnerPlayerNameDisplay'
+      );
       divForBlur.classList.add('blur');
+      winnerPlayerNameDisplay.textContent = `${playerTurn}`;
       winnerDisplay.style.display = 'block';
-      winnerDisplay.innerHTML = `${playerTurn} <div>wins</div>`;
     }
   }
 
