@@ -103,9 +103,11 @@ function screenRendering() {
   const playerTurnPara = document.querySelector('.playerTurnPara');
   const playervs = document.querySelector('.playervs');
   const gameBoardContainer = document.querySelector('.gameBoardContainer');
+  const namingCard = document.querySelector('.naming');
   const divForBlur = document.querySelector('.divForBlur');
   const winnerDisplay = document.querySelector('.winnerDisplay');
   const playAgainButton = document.querySelector('.playAgain');
+  const goToMenuButton = document.querySelector('.goToMenu');
 
   // Creating Divs
   const divs = [];
@@ -129,7 +131,6 @@ function screenRendering() {
     const otherPlayerNameDiv = document.querySelector('.otherPlayerName');
     const aiDifficultyDiv = document.querySelector('.aiDifficultySelection');
     const playButton = document.querySelector('.play');
-    const namingCard = document.querySelector('.naming');
     const player1Input = document.querySelector('#player1Name');
     const player2Input = document.querySelector('#player2Name');
     humanButton.addEventListener('click', () => {
@@ -191,6 +192,10 @@ function screenRendering() {
     reset();
   }
 
+  function goToMenu() {
+    // eslint-disable-next-line no-restricted-globals
+    location.reload();
+  }
   function updateScreen(e) {
     const playerTurn = gameController.getSelectedPlayer().name;
     gameController.playRound(e.target.dataset.index.split(','));
@@ -220,5 +225,6 @@ function screenRendering() {
   resetButton.addEventListener('click', reset);
   gameBoardContainer.addEventListener('click', updateScreen);
   playAgainButton.addEventListener('click', playAgain);
+  goToMenuButton.addEventListener('click', goToMenu);
 }
 screenRendering();
