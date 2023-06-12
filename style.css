@@ -19,11 +19,11 @@ body {
 }
 .line0,
 .line1 {
-  border-bottom: 2px solid grey;
-  border-right: 2px solid grey;
+  border-bottom: 8px solid rgb(200, 200, 200);
+  border-right: 8px solid rgb(200, 200, 200);
 }
 .line2 {
-  border-right: 2px solid grey;
+  border-right: 8px solid rgb(200, 200, 200);
 }
 
 [data-index='0,2'],
