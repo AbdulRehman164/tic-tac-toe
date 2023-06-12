@@ -188,7 +188,7 @@ function screenRendering() {
 
   function playAgain() {
     winnerDisplay.style.display = 'none';
-    divForBlur.style.display = 'none';
+    divForBlur.classList.remove('blur');
     reset();
   }
 
