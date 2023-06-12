@@ -103,6 +103,9 @@ function screenRendering() {
   const playerTurnPara = document.querySelector('.playerTurnPara');
   const playervs = document.querySelector('.playervs');
   const gameBoardContainer = document.querySelector('.gameBoardContainer');
+  const divForBlur = document.querySelector('.divForBlur');
+  const winnerDisplay = document.querySelector('.winnerDisplay');
+  const playAgainButton = document.querySelector('.playAgain');
 
   // Creating Divs
   const divs = [];
@@ -126,7 +129,6 @@ function screenRendering() {
     const otherPlayerNameDiv = document.querySelector('.otherPlayerName');
     const aiDifficultyDiv = document.querySelector('.aiDifficultySelection');
     const playButton = document.querySelector('.play');
-    const divForBlur = document.querySelector('.divForBlur');
     const namingCard = document.querySelector('.naming');
     const player1Input = document.querySelector('#player1Name');
     const player2Input = document.querySelector('#player2Name');
@@ -171,7 +173,6 @@ function screenRendering() {
       }
     });
   }
-  namingCardButtons();
   function reset() {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
@@ -182,6 +183,12 @@ function screenRendering() {
     signs.forEach((sign) => {
       sign.classList.add('signs');
     });
+  }
+
+  function playAgain() {
+    winnerDisplay.style.display = 'none';
+    divForBlur.style.display = 'none';
+    reset();
   }
 
   function updateScreen(e) {
@@ -201,8 +208,6 @@ function screenRendering() {
       gameController.getSelectedPlayer().name
     } turn`;
     if (gameController.checkWinner() === true) {
-      const divForBlur = document.querySelector('.divForBlur');
-      const winnerDisplay = document.querySelector('.winnerDisplay');
       const winnerPlayerNameDisplay = document.querySelector(
         '.winnerPlayerNameDisplay'
       );
@@ -211,8 +216,9 @@ function screenRendering() {
       winnerDisplay.style.display = 'block';
     }
   }
-
-  gameBoardContainer.addEventListener('click', updateScreen);
+  namingCardButtons();
   resetButton.addEventListener('click', reset);
+  gameBoardContainer.addEventListener('click', updateScreen);
+  playAgainButton.addEventListener('click', playAgain);
 }
 screenRendering();
