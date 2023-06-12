@@ -79,12 +79,25 @@ const gameController = (() => {
     return won;
   }
 
+  function checkTie() {
+    const board = gameBoard.printBoard();
+    let tie = false;
+    for (let i = 0; i < 3; i++) {
+      for (let j = 0; j < 3; j++) {
+        if (board[i][j] !== 0 && checkWinner() === false) tie = true;
+        else return false;
+      }
+    }
+    return tie;
+  }
+
   function playRound(index) {
     gameBoard.placeToken(index, selectedPlayer.sign);
     changeSelectedPlayer();
     console.log(gameBoard.printBoard());
     console.log(`${selectedPlayer.name} turn`);
     checkWinner();
+    checkTie();
   }
   return {
     playRound,
@@ -94,6 +107,7 @@ const gameController = (() => {
     getPlayers,
     players,
     checkWinner,
+    checkTie,
   };
 })();
 
@@ -212,13 +226,23 @@ function screenRendering() {
     playerTurnPara.textContent = `${
       gameController.getSelectedPlayer().name
     } turn`;
-    if (gameController.checkWinner() === true) {
+    if (
+      gameController.checkWinner() === true ||
+      gameController.checkTie() === true
+    ) {
       const winnerPlayerNameDisplay = document.querySelector(
         '.winnerPlayerNameDisplay'
       );
+      const wins = document.querySelector('.wins');
       divForBlur.classList.add('blur');
-      winnerPlayerNameDisplay.textContent = `${playerTurn}`;
       winnerDisplay.style.display = 'block';
+      if (gameController.checkWinner() === true) {
+        winnerPlayerNameDisplay.textContent = `${playerTurn}`;
+        wins.style.display = 'block';
+      } else {
+        winnerPlayerNameDisplay.textContent = 'Its Tie';
+        wins.style.display = 'none';
+      }
     }
   }
   namingCardButtons();
