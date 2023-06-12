@@ -113,6 +113,19 @@ input {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
   z-index: 1;
+}
+.invert {
+  filter: invert(1);
+}
+
+.winnerDisplay {
+  font-size: 5rem;
+  font-weight: bolder;
+  text-align: center;
+  position: absolute;
+  z-index: 1;
+  display: none;
+  color: white;
 }

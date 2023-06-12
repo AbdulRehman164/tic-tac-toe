@@ -46,8 +46,8 @@ const gameController = (() => {
   const getSelectedPlayer = () => selectedPlayer;
   console.log(gameBoard.printBoard()); // intial board print
   console.log(`${selectedPlayer.name} turn`);
-
   function checkWinner() {
+    let won = false;
     let match = 0;
     const board = gameBoard.printBoard();
     const columns = [];
@@ -65,14 +65,18 @@ const gameController = (() => {
     const merged = [...board, ...columns, ...diagonal];
     merged.forEach((row) => {
       row.reduce((previousValue, currentValue) => {
-        if (previousValue === currentValue && currentValue !== 0) match++;
+        if (previousValue === currentValue && currentValue !== 0) {
+          match++;
+        }
         return currentValue;
       });
+
       if (match === 2) {
-        alert('you win');
+        won = true;
       }
       match = 0;
     });
+    return won;
   }
 
   function playRound(index) {
@@ -89,6 +93,7 @@ const gameController = (() => {
     changeSelectedPlayer,
     getPlayers,
     players,
+    checkWinner,
   };
 })();
 
@@ -110,10 +115,9 @@ function screenRendering() {
       divs[i][j].classList.add('cells', `line${i}`);
       divs[i][
         j
-      ].innerHTML = `<img src = "/img/cross.svg" class = "crossCircleSign cross cross${i}${j} signs"> <img src = "/img/circle.svg" class = "crossCircleSign circle circle${i}${j} signs">`;
+      ].innerHTML = `<img src = "/img/cross.svg" class = "crossCircleSign cross${i}${j} sign${i}${j} signs"> <img src = "/img/circle.svg" class = "crossCircleSign circle${i}${j} sign${i}${j} signs">`;
     }
   }
-  // initail player turn printing
 
   function namingCardButtons() {
     const humanButton = document.querySelector('.player2Selection');
@@ -181,6 +185,7 @@ function screenRendering() {
   }
 
   function updateScreen(e) {
+    const playerTurn = gameController.getSelectedPlayer().name;
     gameController.playRound(e.target.dataset.index.split(','));
     const board = gameController.printBoard();
     for (let i = 0; i < 3; i++) {
@@ -195,6 +200,13 @@ function screenRendering() {
     playerTurnPara.textContent = `${
       gameController.getSelectedPlayer().name
     } turn`;
+    if (gameController.checkWinner() === true) {
+      const divForBlur = document.querySelector('.divForBlur');
+      const winnerDisplay = document.querySelector('.winnerDisplay');
+      divForBlur.classList.add('blur');
+      winnerDisplay.style.display = 'block';
+      winnerDisplay.innerHTML = `${playerTurn} <div>wins</div>`;
+    }
   }
 
   gameBoardContainer.addEventListener('click', updateScreen);
