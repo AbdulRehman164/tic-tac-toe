@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-continue */
 const gameBoard = (() => {
   const board = [];
@@ -204,15 +205,31 @@ function screenRendering() {
     winnerDisplay.style.display = 'none';
     divForBlur.classList.remove('blur');
     reset();
+    if (gameController.getSelectedPlayer().name === 'A.I') updateScreen();
   }
 
   function goToMenu() {
     // eslint-disable-next-line no-restricted-globals
     location.reload();
   }
+  function getAvailableCell() {
+    const array = [];
+    const board = gameController.printBoard();
+    board.forEach((row, rowIndex) => {
+      row.forEach((cell, cellIndex) => {
+        if (cell === 0) array.push([rowIndex, cellIndex]);
+      });
+    });
+    const randomIndex = Math.floor(Math.random() * array.length);
+    const randomElement = array[randomIndex];
+
+    return randomElement;
+  }
   function updateScreen(e) {
-    const index = e.target.dataset.index.split(',');
+    let index;
     const playerTurn = gameController.getSelectedPlayer().name;
+    if (playerTurn === 'A.I') index = getAvailableCell();
+    else index = e.target.dataset.index.split(',');
     if (gameController.printBoard()[index[0]][index[1]] !== 0) return;
     gameController.playRound(index);
     const board = gameController.printBoard();
@@ -245,7 +262,9 @@ function screenRendering() {
         winnerPlayerNameDisplay.textContent = 'Its Tie';
         wins.style.display = 'none';
       }
+      return;
     }
+    if (gameController.getSelectedPlayer().name === 'A.I') updateScreen();
   }
   namingCardButtons();
   resetButton.addEventListener('click', reset);
