@@ -211,8 +211,10 @@ function screenRendering() {
     location.reload();
   }
   function updateScreen(e) {
+    const index = e.target.dataset.index.split(',');
     const playerTurn = gameController.getSelectedPlayer().name;
-    gameController.playRound(e.target.dataset.index.split(','));
+    if (gameController.printBoard()[index[0]][index[1]] !== 0) return;
+    gameController.playRound(index);
     const board = gameController.printBoard();
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
