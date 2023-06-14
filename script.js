@@ -12,6 +12,7 @@ const gameBoard = (() => {
   const getBoard = () => board;
   const printBoard = () =>
     board.map((row) => row.map((cell) => cell.getValue()));
+
   const placeToken = (index, player) => {
     board[index[0]][index[1]].addToken(player);
   };
@@ -24,7 +25,9 @@ function Cell() {
   const addToken = (player) => {
     value = player;
   };
+
   const getValue = () => value;
+
   return { getValue, addToken };
 }
 
@@ -39,14 +42,15 @@ const gameController = (() => {
       sign: 'O',
     },
   ];
+
   const getPlayers = () => players;
+
   let selectedPlayer = players[0];
   const changeSelectedPlayer = () => {
     selectedPlayer = selectedPlayer === players[0] ? players[1] : players[0];
   };
   const getSelectedPlayer = () => selectedPlayer;
-  console.log(gameBoard.printBoard()); // intial board print
-  console.log(`${selectedPlayer.name} turn`);
+
   function checkWinner() {
     let won = false;
     let match = 0;
@@ -95,8 +99,6 @@ const gameController = (() => {
   function playRound(index) {
     gameBoard.placeToken(index, selectedPlayer.sign);
     changeSelectedPlayer();
-    console.log(gameBoard.printBoard());
-    console.log(`${selectedPlayer.name} turn`);
     checkWinner();
     checkTie();
   }
@@ -148,6 +150,7 @@ function screenRendering() {
     const playButton = document.querySelector('.play');
     const player1Input = document.querySelector('#player1Name');
     const player2Input = document.querySelector('#player2Name');
+
     humanButton.addEventListener('click', () => {
       const isValid = player1Input.checkValidity();
       if (!isValid) player1Input.reportValidity();
@@ -189,6 +192,7 @@ function screenRendering() {
       }
     });
   }
+
   function reset() {
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
@@ -208,10 +212,6 @@ function screenRendering() {
     if (gameController.getSelectedPlayer().name === 'A.I') updateScreen();
   }
 
-  function goToMenu() {
-    // eslint-disable-next-line no-restricted-globals
-    location.reload();
-  }
   function getAvailableCell() {
     const array = [];
     const board = gameController.printBoard();
@@ -220,6 +220,7 @@ function screenRendering() {
         if (cell === 0) array.push([rowIndex, cellIndex]);
       });
     });
+
     const randomIndex = Math.floor(Math.random() * array.length);
     const randomElement = array[randomIndex];
 
@@ -230,8 +231,11 @@ function screenRendering() {
     const playerTurn = gameController.getSelectedPlayer().name;
     if (playerTurn === 'A.I') index = getAvailableCell();
     else index = e.target.dataset.index.split(',');
-    if (gameController.printBoard()[index[0]][index[1]] !== 0) return;
+
+    if (gameController.printBoard()[index[0]][index[1]] !== 0) return; // if the spot is already takedn
+
     gameController.playRound(index);
+
     const board = gameController.printBoard();
     for (let i = 0; i < 3; i++) {
       for (let j = 0; j < 3; j++) {
@@ -242,9 +246,11 @@ function screenRendering() {
           document.querySelector(`.circle${i}${j}`).classList.remove('signs');
       }
     }
+
     playerTurnPara.textContent = `${
       gameController.getSelectedPlayer().name
     } turn`;
+
     if (
       gameController.checkWinner() === true ||
       gameController.checkTie() === true
@@ -270,6 +276,7 @@ function screenRendering() {
   resetButton.addEventListener('click', reset);
   gameBoardContainer.addEventListener('click', updateScreen);
   playAgainButton.addEventListener('click', playAgain);
-  goToMenuButton.addEventListener('click', goToMenu);
+  // eslint-disable-next-line no-restricted-globals
+  goToMenuButton.addEventListener('click', () => location.reload());
 }
 screenRendering();
